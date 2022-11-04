@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Untitled",
+    "definitions": {
+        "Untitled": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "countries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Country"
+                    }
+                }
+            },
+            "required": [
+                "countries"
+            ],
+            "title": "Untitled"
+        },
+        "Country": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "country": {
+                    "type": "string"
+                },
+                "places": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Place"
+                    }
+                }
+            },
+            "required": [
+                "country",
+                "places"
+            ],
+            "title": "Country"
+        },
+        "Place": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "place": {
+                    "type": "string"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "place",
+                "services"
+            ],
+            "title": "Place"
+        }
+    }
+}

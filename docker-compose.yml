@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  checker:
+    image: checker
+    container_name: checker
+    restart: always
+    user: user
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.app.schedule: "@every 15m"
+      ofelia.job-exec.app.command: "consulate-checker"
+    env_file:
+      - .env
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    restart: always
+    depends_on:
+      - checker
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
