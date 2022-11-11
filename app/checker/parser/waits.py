@@ -46,7 +46,6 @@ class element_has_css_value(object):
 
 def wait_until_window_mask_invisible(driver: WebDriver) -> None:
     wait = WebDriverWait(driver, 15)
-    #wait.until(element_has_css_value((By.CLASS_NAME, 'window-mask'), 'display', 'block'))
     wait.until(element_has_css_value((By.CLASS_NAME, 'window-mask'), 'display', 'none'))
 
 

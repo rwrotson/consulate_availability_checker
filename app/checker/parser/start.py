@@ -10,12 +10,12 @@ def initialize_driver() -> WebDriver:
     service = ChromeService(executable_path=exec_path)
 
     chrome_options = Options()
-    #chrome_options.add_argument("--headless")
-    #chrome_options.add_argument("--no-sandbox")
-    #chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_prefs = {}
-    chrome_options.experimental_options["prefs"] = chrome_prefs
-    chrome_prefs["profile.default_content_settings"] = {"images": 2}
+    chrome_options.experimental_options['prefs'] = chrome_prefs
+    chrome_prefs['profile.default_content_settings'] = {'images': 2}
 
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
