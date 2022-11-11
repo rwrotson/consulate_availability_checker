@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.app.schedule: "@every 15m"
+      ofelia.job-exec.app.schedule: "@every 8m"
       ofelia.job-exec.app.command: "consulate-checker"
     env_file:
       - .env

@@ -2,16 +2,16 @@ from selenium.common.exceptions import (
     ElementClickInterceptedException, TimeoutException
 )
 
-from checker.parser import (
-    check_place, initialize_driver, login, logout
-)
+from checker.parser.start import initialize_driver
+from checker.parser.check import check_place, login, logout
+from checker.mail import send_info_emails
 from checker.utils import (
     get_countries_from_json_settings, get_credentials,
     get_places_for_country, get_services_for_place,
     validate_json, print_configuration,
     run_function_until_executed, is_there_available_slots
 )
-from checker.mail import send_info_emails
+
 
 
 def main() -> None:
@@ -50,7 +50,7 @@ def main() -> None:
                 exc=(ElementClickInterceptedException, TimeoutException)
             )
             summary[country][place] = availability
-            
+
             # Logout
             run_function_until_executed(
                 logout, driver,

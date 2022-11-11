@@ -1,5 +1,4 @@
 import os, sys, json
-from time import sleep
 from dotenv import load_dotenv
 from typing import List, Tuple, Dict, Optional, Callable, Union
 from jsonschema import validate
@@ -15,7 +14,7 @@ def validate_json() -> None:
             schema = json.load(file)
         validate(instance=load_json_settings(), schema=schema)
     except (ValidationError, FileNotFoundError):
-        print('Your settings.json file in incorrect')
+        print('Your settings.json file is incorrect')
         sys.exit()
 
     print('settings.json are correct\n')
@@ -56,7 +55,20 @@ def load_env() -> Dict[str, str]:
         'SENDER_EMAIL': os.getenv('SENDER_EMAIL'),
         'SENDER_PASSWORD': os.getenv('SENDER_PASSWORD'),
         'PORT': os.getenv('PORT'),
-        'RECEIVERS_EMAILS': os.getenv('RECEIVERS_EMAILS')
+        'RECEIVERS_EMAILS': os.getenv('RECEIVERS_EMAILS'),
+        'AUTO_APPLICATION': (os.getenv('AUTO_APPLICATION', 'False') == 'true')
+    }
+
+
+def load_credentials_for_application() -> Dict[str, str]:
+    load_dotenv()
+    return {
+        'NAME': os.getenv('NAME'),
+        'SURNAME': os.getenv('SURNAME'),
+        'PATRONYMIC': os.getenv('PATRONYMIC'),
+        'BIRTH_DATE': os.getenv('BIRTH_DATE'),
+        'PHONE_NUMBER': os.getenv('PHONE_NUMBER')[1:],
+        'ADDRESS': os.getenv('ADDRESS')
     }
 
 
@@ -78,6 +90,10 @@ def get_email_port() -> int:
 
 def get_receivers_emails() -> List[str]:
     return load_env()['RECEIVERS_EMAILS'].split(',')
+
+
+def is_auto_application() -> bool:
+    return load_env()['AUTO_APPLICATION']
 
 
 def print_configuration() -> None:
@@ -119,7 +135,7 @@ def run_function_until_executed(
             value_to_return = func(*args)
             is_executed = True
             print(executed_msg, end='')
-        except exc:
+        except exc as e:
             print(' ' * 8 + 'Process interrupted! Trying again...')
-            sleep(5)
+            print(e)
     return value_to_return

@@ -13,7 +13,3 @@ LOGIN_INPUTS = {
 }
 
 CAPTCHA_INPUT = '//*[@id="Captcha"]'
-
-
-
-

@@ -7,10 +7,10 @@ In this file, there are instructions that indicate which services, in which cons
 By default, the file is configured for searching for submission of documents for a international passport in all Russian consulates in Kazakhstan. Use it as an example. Notice that you should specify the place of application for service and service title exactly as it designated at [QMIDPASS.RU](https://q.midpass.ru/).
 
 Places of application for service is located on login page:
-![places of application](./1.png)
+![places of application](./README/1.png)
 
 The services titles are presented on a first page after login:
-![services](./2.png)
+![services](./README/2.png)
 
 ## .env-file
 
@@ -29,6 +29,8 @@ SENDER_EMAIL=testmail@gmail.com
 SENDER_PASSWORD=xxxxxxxxxxxxxxxx
 
 RECEIVERS_EMAILS=testmail1@gmail.com,testmail2@gmail.com
+
+AUTO_APPLICATION=false
 ```
 
 First two lines are your credentials to login to [QMIDPASS.RU](https://q.midpass.ru/). Get it there.
@@ -37,7 +39,19 @@ Also the script needs to solve captcha to login. It deals with captcha via [2cap
 
 The script sends info emails when there are available slots for the service. To do it you should configure email from where these messages will be sent with SENDER_EMAIL, SENDER_PASSWORD and PORT. Different mail services has different procedures, google your own. Here is the example for [Yandex.Mail](https://yandex.com/support/mail/mail-clients/others.html).
 
-Finally, you need to specify on which emails the message will be delivered. Write these addresses in RECEIVERS_EMAILS separated with comma without space. In case there is only one address, write it without comma.
+Then you need to specify on which emails the message will be delivered. Write these addresses in RECEIVERS_EMAILS separated with comma without space. In case there is only one address, write it without comma.
+
+Finally, specify if you want script to automatically apply for a service, or only to notify you about a vacant slots. In the first case set AUTO_APPLICATION=true, otherwise set AUTO_APPLICATION=false.
+
+If you selected AUTO_APPLICATION=true, also add the following info to the file. Example:
+```
+NAME=Иван
+SURNAME=Иванов
+PATRONYMIC=Иванович
+BIRTH_DATE=01.01.2000
+PHONE_NUMBER=+79998887766
+ADDRESS=город, улица, дом, квартира
+```
 
 ## docker-compose
 
